@@ -27,4 +27,4 @@ mode="d"
 #  -e AWS_SECRET_KEY=$AWS_SECRET_KEY \
 #  -w /opt/ packer-vagrant build ${template}
 
-docker run --rm   -e PACKER_LOG=1   -e PACKER_LOG_PATH="packer-docker.log"   --privileged   --cap-add=ALL -v /lib/modules:/lib/modules   -it   --network=host   -v `pwd`:/opt/   --entrypoint "" -w /opt/ packer-vagrant bash
+docker run --rm   -e PACKER_LOG=1   -e PACKER_LOG_PATH="packer-docker.log"   --privileged   --cap-add=ALL -v /lib/modules:/lib/modules   -it   --network=host   -v `pwd`:/opt/ -v /mnt/h9/cache:/var/tmp  --entrypoint "" -w /opt/ packer-vagrant bash

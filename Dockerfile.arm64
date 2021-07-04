@@ -1,0 +1,10 @@
+FROM hashicorp/packer:light-arm64
+
+RUN apk add --update qemu qemu-system-x86_64 qemu-img openssh python3 py3-pip samba curl xorriso ansible
+
+#RUN apt update && apt install curl g++ gcc autoconf automake bison libc6-dev libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev -y
+#
+#RUN curl -sSL https://rvm.io/mpapis.asc | gpg2 --import
+#RUN curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import
+#RUN curl -sSL https://get.rvm.io | bash -s stable
+#RUN source ~/.rvm/scripts/rvm && rvm install ruby
