@@ -167,7 +167,8 @@ cmdline() {
         echo "* NAME: ${NAME}, WINDOWS_ARCH: ${WINDOWS_ARCH}, WINDOWS_VERSION: ${WINDOWS_VERSION}, WINDOWS_EDITION: ${WINDOWS_EDITION}"
         ISO_CHECKSUM=$(awk "/$(basename ${ISO_URL})/ { print \$1 }" win_iso.sha256)
         if [[ ${PACKER_VAGRANT_PROVIDER} = "libvirt" ]]; then
-          test -f "${VIRTIO_WIN_ISO}" || curl -sL "${VIRTIO_WIN_ISO_URL}" --output "${VIRTIO_WIN_ISO}"
+          echo "Downloading WINDOWS_ARCH: ${WINDOWS_ARCH} from ${VIRTIO_WIN_ISO_URL} to ${VIRTIO_WIN_ISO}"
+          test -f "${VIRTIO_WIN_ISO}" || curl -sL "${VIRTIO_WIN_ISO_URL}" --progress-bar --output "${VIRTIO_WIN_ISO}"
           if [[ ! -d "${VIRTIO_WIN_ISO_DIR}" ]]; then
             xorriso -report_about SORRY -osirrox on -indev "${VIRTIO_WIN_ISO}" -extract / "${VIRTIO_WIN_ISO_DIR}"
             find "${VIRTIO_WIN_ISO_DIR}" -type d -exec chmod u+rwx {} \;
