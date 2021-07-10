@@ -5,7 +5,7 @@
   "_comment4": "NAME=windows-server-2019-standard-x64-eval    WINDOWS_VERSION=2019 VIRTIO_WIN_ISO_DIR=./packer_cache/virtio-win ISO_URL=https://software-download.microsoft.com/download/pr/17763.737.190906-2324.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us_1.iso                                                          PACKER_IMAGES_OUTPUT_DIR=/var/tmp/ TMPDIR=/var/tmp/ packer build -only=qemu windows.json",
   "builders": [
     {
-      "accelerator": "{{ user `accelerator` }}",
+      "accelerator": "",
       "communicator": "winrm",
       "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
@@ -28,11 +28,12 @@
       "output_directory": "{{ user `name` }}-qemu",
       "shutdown_command": "A:\\sysprep.bat",
       "shutdown_timeout": "15m",
+      "qemuargs": [["-machine", "type=pc"]],
       "type": "qemu",
       "vm_name": "{{ user `name` }}",
       "winrm_insecure": "true",
       "winrm_password": "{{ user `winrm_password` }}",
-      "winrm_timeout": "30m",
+      "winrm_timeout": "600m",
       "winrm_use_ssl": "true",
       "winrm_username": "{{ user `winrm_username` }}"
     },
@@ -132,14 +133,14 @@
     }
   ],
   "variables": {
-    "accelerator": "kvm",
+    "accelerator": "",
     "autounattend": "http/windows-{{ env `WINDOWS_VERSION` }}/Autounattend.xml",
     "cpus": "4",
     "disk_size": "51200",
     "headless": "false",
     "iso_checksum": "win_iso.sha256",
     "iso_url": "{{ env `ISO_URL` }}",
-    "memory": "8192",
+    "memory": "2048",
     "name": "{{ env `NAME` }}",
     "packer_images_output_dir": "{{ env `PACKER_IMAGES_OUTPUT_DIR` }}",
     "virtio_win_iso_dir": "{{ env `VIRTIO_WIN_ISO_DIR` }}",
